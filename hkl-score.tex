@@ -17,12 +17,8 @@
 
 
 % The following packages can be found on http:\\www.ctan.org
-\usepackage{graphicx} % for pdf, bitmapped graphics files
-%\usepackage{epsfig} % for postscript graphics files
-%\usepackage{mathptmx} % assumes new font selection scheme installed
-%\usepackage{times} % assumes new font selection scheme installed
-\usepackage{amsmath} % assumes amsmath package installed
-%\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{graphicx} % for pdf, bitmapped graphics files\
+\usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage{hyperref}
 
@@ -30,21 +26,6 @@
 Hing-King-Linden Score: 
 A robust method of assessing foosball matchups independent of tournament structure
 }
-
-%\author{ \parbox{3 in}{\centering Huibert Kwakernaak*
-%         \thanks{*Use the $\backslash$thanks command to put information here}\\
-%         Faculty of Electrical Engineering, Mathematics and Computer Science\\
-%         University of Twente\\
-%         7500 AE Enschede, The Netherlands\\
-%         {\tt\small h.kwakernaak@autsubmit.com}}
-%         \hspace*{ 0.5 in}
-%         \parbox{3 in}{ \centering Pradeep Misra**
-%         \thanks{**The footnote marks may be inserted manually}\\
-%        Department of Electrical Engineering \\
-%         Wright State University\\
-%         Dayton, OH 45435, USA\\
-%         {\tt\small pmisra@cs.wright.edu}}
-%}
 
 \author{Philip Linden, Adam King and Brandon Hing% <-this % stops a space
 }
@@ -62,7 +43,8 @@ A robust method of assessing foosball matchups independent of tournament structu
 The results of randomly seeded single-elimination tournaments does not reflect a player or team's relative rank, or foosball performance score. 
 Existing ranking such as Elo Ranking or Swiss systems depend on a large number of matches to be played to produce accurate results. 
 We present a method of determining rank using the relative performance of a player's opponent and the points scored on that opponent during a foosball match.
-We demonstrate that the Hing-King-Linden Score, or HKL, is a robust method of predicting foosball matchups between two players or teams, and a reliable way to seed teams and tournaments fairly, using only the results of a randomly seeded single-elimination tournament.
+We demonstrate that the Hing-King-Linden Score, or HKL, is a robust method of predicting foosball matchups between two players or teams, and a reliable way to seed teams and tournaments fairly based on only the number of matches played and tracking points scored against each opponent.
+We show the utility of HKL using the real results of a randomly seeded single-elimination tournament.
 
 \end{abstract}
 
@@ -182,9 +164,11 @@ Since $K$ and $S$ are scaled to the same fixed range, $H$ is also scaled to that
 \end{equation}
 
 \begin{table}[hb]
-        \begin{tabular}{lcccccc}
+        \begin{tabular}{lccc|ccc}
                 \toprule
-                Player & $r$ & $\bar{p}$ & $k$ & $S$ & $K$ & $H$ \\
+                        & \multicolumn{3}{c}{Parameters} & \multicolumn{3}{c}{Rankings} \\
+                \midrule
+                Player  & $r$   & $\bar{p}$ & $k$ & $S$ & $K$   & $H$ \\
                 \midrule
                 Abhra	& 1	& 0.00	& 1.00	& 0.00	& 0.00	& 0.00 \\
                 Adam	& 1	& 4.00	& 4.12	& 2.45	& 5.78	& 4.11 \\
@@ -209,6 +193,7 @@ Since $K$ and $S$ are scaled to the same fixed range, $H$ is also scaled to that
         \label{tab:example-ratings}
 \end{table}
 
+\section{FEATURES}
 Since HKL is relative between all members of a tournament and only depends on scores earned during matches, three major advantages emerge from this new ranking method:
 
 \begin{enumerate}
@@ -216,6 +201,21 @@ Since HKL is relative between all members of a tournament and only depends on sc
         \item HKL can be updated during a match that has not yet completed.
         \item HKL is independent of which matches on the tournament schedule are played, and independent of the order that they are played.
 \end{enumerate}
+
+Another feature of the HKL that it is purely additive in nature.
+Even if a strong player loses a match to a opponent with a much lower rank, the stronger player still earns points. 
+In other words, all parameters are greater than or equal to zero.
+This means that the only way a player's HKL can decrease is if the minimum or maximum of all $k$ or all $s$ change. 
+
+\subsection{Example Scenario: No decrease in HKL after a match}
+Two players, $A$ and $B$, play a match with a matchup diffulty $d=1$.
+At the start of the match, their performance parameters, $k$ and $s$, are greater than the performance parameters of player $C$, but less than the performance parameters of player $D$, who has the highest HKL out of all players in the tournament.
+The final score is $5-0$ and player $A$ wins the match.
+The number of matches completed, $r$, for both players increases by $1$.
+Even though player $B$ did not score any points, it is not possible for their $k$ or $s$ to decrease, and the performance parameters of both players is still higher than player $C$.
+Player $A$ has scored enough adjusted points, $\bar{p}$, to tie player $D$ in $s$ but has played more matches than player $D$ and still has a lower $k$ score.
+In this example, the minimum and maximum $s$ and $k$ out of all players in the tournament has not changed. 
+Therefore both player $A$ and player $B$ gain in Seed Rating, $S$, and Power Rating, $K$, but no other players in the tournament see a decrease in HKL.
 
 \section{PREDICTION ACCURACY}
 % Show how HKL changes with predictions as a tournament is played
