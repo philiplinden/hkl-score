@@ -18,6 +18,7 @@
 
 % The following packages can be found on http:\\www.ctan.org
 \usepackage{graphicx} % for pdf, bitmapped graphics files\
+\usepackage{subcaption}
 \usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage{hyperref}
@@ -194,12 +195,13 @@ Since $K$ and $S$ are scaled to the same fixed range, $H$ is also scaled to that
 \end{table}
 
 \section{FEATURES}
-Since HKL is relative between all members of a tournament and only depends on scores earned during matches, three major advantages emerge from this new ranking method:
+Since HKL is relative between all members of a tournament and only depends on scores earned during matches, four major advantages emerge from this new ranking method:
 
 \begin{enumerate}
-        \item HKL of all contestants is defined as soon as one point is scored in the entire tournament.
+        \item HKL of all contestants is defined as soon as one match is completed by every contestant.
         \item HKL can be updated during a match that has not yet completed.
         \item HKL is independent of which matches on the tournament schedule are played, and independent of the order that they are played.
+        \item HKL remains valid for comparisons between contestants who have played a different number of matches.
 \end{enumerate}
 
 Another feature of the HKL that it is purely additive in nature.
@@ -239,14 +241,115 @@ Therefore both player $A$ and player $B$ gain in Seed Rating, $S$, and Power Rat
 Like other ranking systems, HKL accuracy increases with the number of matches played.
 In this section, we demonstrate how HKL predicts match results and how these predictions respond to match results using real data collected during a single elimination tournament.
 
-\subsection{Tournament Format}
+% \subsection{Tournament Format}
 % Show bracket and player score matrix
 
-\subsection{Rounds 1 and 2: Initial HKL are determined}
+\subsection{Asynchronous tournament progression}
+\begin{figure}[hb]
+        \centering
+        \begin{subfigure}[h]{0.4\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{fig/singles-bracket_1.png}
+                \caption{Tournament bracket}
+        \end{subfigure}
+        \begin{subfigure}[h]{0.4\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{fig/score-matrix_1.png}
+                \caption{Score matrix}
+        \end{subfigure}
+        \caption{Three games are played in Round 1 of the tournament.}
+\end{figure}
+\begin{figure}[hb]
+        \centering
+        \begin{subfigure}[h]{0.5\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/difficulty_1.png}
+        \end{subfigure}
+        \begin{subfigure}[h]{0.4\textwidth}
+                \footnotesize
+                \centering
+                \begin{tabular}{lccc}
+                        \toprule
+                        Player  & $r$   & $\bar{p}$ & $k$ \\
+                        \midrule
+                        Abhra	& 0	& 0.00	& 0.00 \\
+                        Adam	& 1	& 4.00	& 4.12 \\
+                        Ben	& 0	& n/a	& n/a  \\
+                        Bethany	& 1	& 4.00	& 4.12 \\
+                        Brandon	& 1	& 3.00	& 3.61 \\
+                        Caleb	& 1	& 5.00	& 6.40 \\
+                        Cruz	& 0	& 4.25	& 5.84 \\
+                        Jeff	& 0	& n/a	& n/a  \\
+                        Kyle	& 0	& n/a	& n/a  \\
+                        Lisa	& 0	& n/a	& n/a  \\
+                        Matt	& 0	& n/a	& n/a  \\
+                        Natasha	& 0	& n/a	& n/a  \\
+                        Phil	& 1	& 3.00	& 3.16 \\
+                        Sean	& 1	& 3.00	& 3.61 \\
+                        Steve	& 0	& n/a	& n/a  \\
+                        Tyler	& 0	& n/a	& n/a  \\
+                        \bottomrule
+                \end{tabular}
+        \end{subfigure}
+        \caption{Match difficulty can be predicted for matchups between 
+                 any player who has completed one game.}
+\end{figure}
 
-\subsection{Round 3: Reacting to upsets}
+\begin{figure}[hb]
+        \centering
+        \begin{subfigure}[h]{0.4\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{fig/singles-bracket_3.png}
+                \caption{Tournament bracket}
+        \end{subfigure}
+        \begin{subfigure}[h]{0.4\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{fig/score-matrix_3.png}
+                \caption{Score matrix}
+        \end{subfigure}
+        \caption{Matches in the bracket can be played asynchronously.}
+\end{figure}
+\begin{figure}[hb]
+        \centering
+        \begin{subfigure}[h]{0.5\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{fig/difficulty_3.png}
+                \caption{}
+        \end{subfigure}
+        \begin{subfigure}[h]{0.4\textwidth}
+                \footnotesize
+                \centering
+                \begin{tabular}{lccc}
+                        \toprule
+                        Player  & $r$   & $\bar{p}$ & $k$ \\
+                        \midrule
+                        Abhra	& 0	& 0.00	& 0.00 \\
+                        Adam	& 1	& 4.00	& 4.12 \\
+                        Ben	& 0	& n/a	& n/a  \\
+                        Bethany	& 1	& 4.00	& 4.12 \\
+                        Brandon	& 1	& 3.00	& 3.61 \\
+                        Caleb	& 1	& 5.00	& 6.40 \\
+                        Cruz	& 0	& 4.25	& 5.84 \\
+                        Jeff	& 0	& n/a	& n/a  \\
+                        Kyle	& 0	& n/a	& n/a  \\
+                        Lisa	& 0	& n/a	& n/a  \\
+                        Matt	& 0	& n/a	& n/a  \\
+                        Natasha	& 0	& n/a	& n/a  \\
+                        Phil	& 1	& 3.00	& 3.16 \\
+                        Sean	& 1	& 3.00	& 3.61 \\
+                        Steve	& 0	& n/a	& n/a  \\
+                        Tyler	& 0	& n/a	& n/a  \\
+                        \bottomrule
+                \end{tabular}
+        \end{subfigure}
+        \caption{Since player performance is scaled by the number of matches played,
+                valid predictions can be made about matchups between any player who
+                has completed at least one game. HKL requires all players in the 
+                tournament to play one game before can be assessed.}
+\end{figure}
 
-\subsection{Round 4: Predicting a winner}
+\subsection{Reacting to upsets}
+
+\subsection{Predicting a winner}
 
 \section{CASE STUDY: USING INDIVIDUAL HKL RATINGS TO CONDUCT A DOUBLES TOURNAMENT}
 % Show distribution of team HKL using singles HKL for each player
