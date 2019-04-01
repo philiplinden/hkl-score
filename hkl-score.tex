@@ -41,11 +41,17 @@ A robust method of assessing foosball matchups independent of tournament structu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-The results of randomly seeded single-elimination tournaments does not reflect a player or team's relative rank, or foosball performance score. 
-Existing ranking such as Elo Ranking or Swiss systems depend on a large number of matches to be played to produce accurate results. 
-We present a method of determining rank using the relative performance of a player's opponent and the points scored on that opponent during a foosball match.
-We demonstrate that the Hing-King-Linden Score, or HKL, is a robust method of predicting foosball matchups between two players or teams, and a reliable way to seed teams and tournaments fairly based on only the number of matches played and tracking points scored against each opponent.
-We show the utility of HKL using the real results of a randomly seeded single-elimination tournament.
+The results of randomly seeded single-elimination tournaments does not reflect a
+player or team's relative rank, or foosball performance score. Existing ranking
+such as Elo Ranking or Swiss systems depend on a large number of matches to be
+played to produce accurate results. We present a method of determining rank
+using the relative performance of a player's opponent and the points scored on
+that opponent during a foosball match. We demonstrate that the Hing-King-Linden
+Score, or HKL, is a robust method of predicting foosball matchups between two
+players or teams, and a reliable way to seed teams and tournaments fairly based
+on only the number of matches played and tracking points scored against each
+opponent. We show the utility of HKL using the real results of a randomly seeded
+single-elimination tournament.
 
 \end{abstract}
 
@@ -53,30 +59,55 @@ We show the utility of HKL using the real results of a randomly seeded single-el
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 
-Championship tournaments are a tried-and-true organization for competitions in sports today, and foosball is no exception. 
-However, both single- and double-elimination tournament results are predicated upon fair seeding of the matchups at the start of the tournament.
-Some existing ranking systems used to seed tournaments are Elo Ranking\cite{}, used for the FIFA World Cup\cite{}, or the Swiss-system\cite{}, commonly used in chess tournaments\cite{}.
-A fair score in both Elo and Swiss systems requires that each member of the tournament plays every other in round-robin fashion, where $\frac{n}{2}(n-1)$ matches must be played before a rank is determined. 
-The difference in these rankings is in how scores incorporate margin of victory and win/loss rates.
-Additionally, existing rating systems assume that results are binary (win or loss) or uncapped scores (higher score wins). In foosball, wins are determined by the first team to score a set number of points. 
+Championship tournaments are a tried-and-true organization for competitions in
+sports today, and foosball is no exception. However, both single- and
+double-elimination tournament results are predicated upon fair seeding of the
+matchups at the start of the tournament. Some existing ranking systems used to
+seed tournaments are Elo Ranking\cite{}, used for the FIFA World Cup\cite{}, or
+the Swiss-system\cite{}, commonly used in chess tournaments\cite{}. A fair score
+in both Elo and Swiss systems requires that each member of the tournament plays
+every other in round-robin fashion, where $\frac{n}{2}(n-1)$ matches must be
+played before a rank is determined. The difference in these rankings is in how
+scores incorporate margin of victory and win/loss rates. Additionally, existing
+rating systems assume that results are binary (win or loss) or uncapped scores
+(higher score wins). In foosball, wins are determined by the first team to score
+a set number of points. 
 
-In a recent tournament, the competition organizers used a single-elimination tournament between 16 randomly seeded players to seed an 8-team tournament of evenly matched 2-person teams. 
-In this event structure, we must determine relative skill of 16 players when the conditions for Elo and Swiss rankings systems are not met---not only have players not played at least one match against one another, but some players played more matches than others. In some cases, players eliminated in the first round scored more points and lost by a smaller margin of victory against the overall winner of the tournament. Thus it is clear that a robust ranking system is needed to assemble fair teams based on match results using the relative performance of a player's opponent to determine that player's rank.
+In a recent tournament, the competition organizers used a single-elimination
+tournament between 16 randomly seeded players to seed an 8-team tournament of
+evenly matched 2-person teams. In this event structure, we must determine
+relative skill of 16 players when the conditions for Elo and Swiss rankings
+systems are not met---not only have players not played at least one match
+against one another, but some players played more matches than others. In some
+cases, players eliminated in the first round scored more points and lost by a
+smaller margin of victory against the overall winner of the tournament. Thus it
+is clear that a robust ranking system is needed to assemble fair teams based on
+match results using the relative performance of a player's opponent to determine
+that player's rank.
 
-In this paper we propose the Hing-King-Linden Score, or HKL, which weighs the cumulative number of points scored against each opponent and the relative performance of that opponent. 
-Critically, HKL only requires one randomly seeded single-elimination tournament to determine an accurate score that reflects relative performance. 
+In this paper we propose the Hing-King-Linden Score, or HKL, which weighs the
+cumulative number of points scored against each opponent and the relative
+performance of that opponent. Critically, HKL only requires one randomly seeded
+single-elimination tournament to determine an accurate score that reflects
+relative performance. 
 
-The primary goal of the HKL is to rank contestants fairly given the following principles:
+The primary goal of the HKL is to rank contestants fairly given the following
+principles:
 
 \begin{enumerate}
-        \item Given two players who lose a match in the same round of the tournament by the same margin of victory, the player whose opponent progresses through more subsequent rounds should have a higher HKL.
-        \item The winner of a randomly-seeded single-elimination tournament does not necessarily have the highest rank.
+        \item Given two players who lose a match in the same round of the
+        tournament by the same margin of victory, the player whose opponent
+        progresses through more subsequent rounds should have a higher HKL.
+        \item The winner of a randomly-seeded single-elimination tournament does
+        not necessarily have the highest rank.
         \item Two players with similar HKL compete with similar performance.
 \end{enumerate}
 
 \section{DEFINITION}
-As matches are played, points scored are tracked individually for each player per opponent. 
-Points scored per opponent are cumulative, but in a single-elimination tournament no pair of contestants appears in the bracket more than once.
+As matches are played, points scored are tracked individually for each player
+per opponent. Points scored per opponent are cumulative, but in a
+single-elimination tournament no pair of contestants appears in the bracket more
+than once.
 
 \begin{figure}[hb]
         \includegraphics[width=\linewidth]{fig/score-matrix.png}
@@ -85,7 +116,11 @@ Points scored per opponent are cumulative, but in a single-elimination tournamen
         \caption{Points scored are tracked per opponent for each player.}
 \end{figure}
 
-Since some players progress further than others in the bracket and thus have more scoring opportunities in every round, it is necessary to normalize the total points scored per opponent, $p$, by a player's progression in the tournament, $r$, where $r$ is the number of matches that a player has completed. 
+Since some players progress further than others in the bracket and thus have
+more scoring opportunities in every round, it is necessary to normalize the
+total points scored per opponent, $p$, by a player's progression in the
+tournament, $r$, where $r$ is the number of matches that a player has completed.
+
 
 \begin{equation}
         \hat{p} = p/r
@@ -99,27 +134,37 @@ Since some players progress further than others in the bracket and thus have mor
         \caption{Scored points are normalized by progression in the tournament.}
 \end{figure}
 
-A player's overall performance, $k$, is then calculated as the root-sum-square of the normalized total points scored and progression in the tournament. 
-By using the root-sum-square of progression and normalized scores, we estimate how consistently a player performs in the tournament.
-A high performing player is likely to win many rounds of the tournament by large margins while a weaker player might win some matches but by small margins.
-Conversely, a player that scores many points in just a few matches is more likely to be a strong player.
+A player's overall performance, $k$, is then calculated as the root-sum-square
+of the normalized total points scored and progression in the tournament. By
+using the root-sum-square of progression and normalized scores, we estimate how
+consistently a player performs in the tournament. A high performing player is
+likely to win many rounds of the tournament by large margins while a weaker
+player might win some matches but by small margins. Conversely, a player that
+scores many points in just a few matches is more likely to be a strong player.
 
 \begin{equation}
         k = \sqrt{\hat{p}^2 + r^2}
         \label{eq:skill-indicator}
 \end{equation}
 
-To provide a basis for comparison between player performance scores, we linearly scale $k$ to an arbitrary fixed range, such as $n = (0,10)$, to compose a player's Power Rating, $H$. Since this scale is relative, scaling depends on the maximum and minumum $k$ in the set of all players in the tournament.
+To provide a basis for comparison between player performance scores, we linearly
+scale $k$ to an arbitrary fixed range, such as $n = (0,10)$, to compose a
+player's Power Rating, $H$. Since this scale is relative, scaling depends on the
+maximum and minumum $k$ in the set of all players in the tournament.
 
 \begin{equation}
         K = n_1 + \left(\frac{n_2 - n_1}{\text{max}(k) - \text{min}(k)}\right)(k - \text{min}(k))  
         \label{eq:power-rating}
 \end{equation}
 
-Since $k$ is independent of a player's opponent, we can estimate the relative difficulty of any matchup between two players, $d$, with a simple ratio.
-A difficulty of $d<1$ indicates an ``easy'' match while $d>1$ indicates a ``difficult'' match from the perspective of any player against any opponent.
-A perfectly even matchup results in $d=1$, which makes sense if considering the most perfect matchup---a player versus themselves---is unity difficulty. 
-For reporting, we may scale difficulty using \autoref{eq:power-rating}, replacing $k$ with $d$. 
+Since $k$ is independent of a player's opponent, we can estimate the relative
+difficulty of any matchup between two players, $d$, with a simple ratio. A
+difficulty of $d<1$ indicates an ``easy'' match while $d>1$ indicates a
+``difficult'' match from the perspective of any player against any opponent. A
+perfectly even matchup results in $d=1$, which makes sense if considering the
+most perfect matchup---a player versus themselves---is unity difficulty. For
+reporting, we may scale difficulty using \autoref{eq:power-rating}, replacing
+$k$ with $d$. 
 
 \begin{equation}
         d = \frac{k_{player}}{k_{opponent}}
@@ -133,11 +178,15 @@ For reporting, we may scale difficulty using \autoref{eq:power-rating}, replacin
         \caption{The ratio of $d$ for any matchup indicates the relative difficulty for one player against another.}
 \end{figure}
 
-Next, we weigh the number of points scored per opponent by the matchup difficulty against that opponent. 
-In other words, a point scored in a difficult match is ``worth'' more than a point scored in an easy match, regardless of which round of the tournament the point was scored.
-We estimate a player's cumulative performance, $s$, by summing the total adjusted points, $\bar{p}$, scored in all rounds of the tournament.
-Again, we linearly scale $s$ to arbitrary range $n$ to ground it in a relative basis, and map it to the same scale as $K$. 
-The scaled performance metric, $S$, is called a player's Seed Rating.
+Next, we weigh the number of points scored per opponent by the matchup
+difficulty against that opponent. In other words, a point scored in a difficult
+match is ``worth'' more than a point scored in an easy match, regardless of
+which round of the tournament the point was scored. We estimate a player's
+cumulative performance, $s$, by summing the total adjusted points, $\bar{p}$,
+scored in all rounds of the tournament. Again, we linearly scale $s$ to
+arbitrary range $n$ to ground it in a relative basis, and map it to the same
+scale as $K$. The scaled performance metric, $S$, is called a player's Seed
+Rating.
 
 \begin{equation}
         \bar{p} = p d
@@ -154,10 +203,12 @@ The scaled performance metric, $S$, is called a player's Seed Rating.
         \label{eq:seed-rating}
 \end{equation}
 
-Finally, we assert that Power Rating, $K$, and Seed Rating, $S$, are equally justified as indicators of a player's performance. 
-We see that Power Rating estimates performance over many matches while Seed Rating accounts for performance in individual matches.
-Thus we arrive at the HKL, $H$, defined as the average between the Power and Seed Ratings.
-Since $K$ and $S$ are scaled to the same fixed range, $H$ is also scaled to that range.
+Finally, we assert that Power Rating, $K$, and Seed Rating, $S$, are equally
+justified as indicators of a player's performance. We see that Power Rating
+estimates performance over many matches while Seed Rating accounts for
+performance in individual matches. Thus we arrive at the HKL, $H$, defined as
+the average between the Power and Seed Ratings. Since $K$ and $S$ are scaled to
+the same fixed range, $H$ is also scaled to that range.
 
 \begin{equation}
         H = (K + S)/2
@@ -198,28 +249,53 @@ Since $K$ and $S$ are scaled to the same fixed range, $H$ is also scaled to that
 Since HKL is relative between all members of a tournament and only depends on scores earned during matches, four major advantages emerge from this new ranking method:
 
 \begin{enumerate}
-        \item HKL of all contestants is defined as soon as one match is completed by every contestant.
+        \item HKL of all contestants is defined as soon as one match is
+        completed by every contestant.
         \item HKL can be updated during a match that has not yet completed.
-        \item HKL is independent of which matches on the tournament schedule are played, and independent of the order that they are played.
-        \item HKL remains valid for comparisons between contestants who have played a different number of matches.
+        \item HKL is independent of which matches on the tournament schedule are
+        played, and independent of the order that they are played.
+        \item HKL remains valid for comparisons between contestants who have
+        played a different number of matches.
 \end{enumerate}
 
-Another feature of the HKL that it is purely additive in nature.
-Even if a strong player loses a match to a opponent with a much lower rank, the stronger player still earns points. 
-In other words, all parameters are greater than or equal to zero.
-This means that the only way a player's HKL can decrease is if the minimum or maximum of all $k$ or all $s$ change. 
+Another feature of the HKL that it is purely additive in nature. Even if a
+strong player loses a match to a opponent with a much lower rank, the stronger
+player still earns points. In other words, all parameters are greater than or
+equal to zero. This means that the only way a player's HKL can decrease is if
+the minimum or maximum of the sets of all $k$ or all $s$ change. 
 
 \subsection{Example Scenario: No decrease in HKL after a match}
-Two players, $A$ and $B$, play a match with a matchup diffulty $d=1$.
-At the start of the match, their performance parameters, $k$ and $s$, are greater than the performance parameters of player $C$, but less than the performance parameters of player $D$, who has the highest HKL out of all players in the tournament.
-The final score is $5-0$ and player $A$ wins the match.
-The number of matches completed, $r$, for both players increases by $1$.
-Even though player $B$ did not score any points, it is not possible for their $k$ or $s$ to decrease, and the performance parameters of both players is still higher than player $C$.
-Player $A$ has scored enough adjusted points, $\bar{p}$, to tie player $D$ in $s$ but has played more matches than player $D$ and still has a lower $k$ score.
-In this example, the minimum and maximum $s$ and $k$ out of all players in the tournament has not changed. 
-Therefore both player $A$ and player $B$ gain in Seed Rating, $S$, and Power Rating, $K$, but no other players in the tournament see a decrease in HKL.
+Two players, $A$ and $B$, play a match with a matchup diffulty $d=1$. At the
+start of the match, their performance parameters, $k$ and $s$, are greater than
+the performance parameters of player $C$, but less than the performance
+parameters of player $D$, who has the highest HKL out of all players in the
+tournament. The final score is $5-0$ and player $A$ wins the match. The number
+of matches completed, $r$, for both players increases by $1$. Even though player
+$B$ did not score any points, it is not possible for their $k$ or $s$ to
+decrease, and the performance parameters of both players is still higher than
+player $C$. Player $A$ has scored enough adjusted points, $\bar{p}$, to tie
+player $D$ in $s$ but has played more matches than player $D$ and still has a
+lower $k$ score. In this example, the minimum and maximum $s$ and $k$ out of all
+players in the tournament has not changed. Therefore both player $A$ and player
+$B$ gain in Seed Rating, $S$, and Power Rating, $K$, but no other players in the
+tournament see a decrease in HKL.
 
-% \subsection{Example Scenario: ?}
+\subsection{Example Scenario: Applying HKL in a double elimination tournament}
+Since HKL is evaluated using scores normalized by the number of matches played
+(\autoref{eq:normalized-score}), no adjustments to the HKL calculations are
+required to compare the performance of players in the primary bracket and the
+consolation bracket of a double elimination tournament. For example, consider
+player $A$ and player $B$, where player $A$ loses to player $B$ in the first
+round of the primary bracket then wins all matches in the consolation bracket,
+and player $B$ wins all matches in the primary bracket. The structure of a
+double elimination bracket now leads to a rematch between $A$ and $B$ for the
+championship, but player $A$ has necessarily played one more game than player
+$B$ thus far. Since we normalize the accrued points by the number of games
+played, we can directly compare the HKL between $A$ and $B$.
+
+\subsection{Example Scenario: Predicting a winner in a ``perfect'' matchup}
+$k$ predicts long term trends (finishing matches) but $s$ accounts for per-game
+(transient, dynamic) performance
 
 % \section{CONCLUSION}
 
@@ -238,8 +314,10 @@ Therefore both player $A$ and player $B$ gain in Seed Rating, $S$, and Power Rat
 
 \section{CASE STUDY: PREDICTION ACCURACY OVER A SINGLE-ELINIMATION TOURNAMENT}
 % Show how HKL changes with predictions as a tournament is played
-Like other ranking systems, HKL accuracy increases with the number of matches played.
-In this section, we demonstrate how HKL predicts match results and how these predictions respond to match results using real data collected during a single elimination tournament.
+Like other ranking systems, HKL accuracy increases with the number of matches
+played. In this section, we demonstrate how HKL predicts match results and how
+these predictions respond to match results using real data collected during a
+single elimination tournament.
 
 % \subsection{Tournament Format}
 % Show bracket and player score matrix
@@ -558,18 +636,19 @@ In this section, we demonstrate how HKL predicts match results and how these pre
                 \caption{The HKL sees many changes after this match.}
         \end{subfigure}
         \caption{The HKL correctly predicts Caleb to win against Tyler despite both players entering 
-                 the match with equal Power Ratings ($K$).}
+                 the match with equal Power Ratings ($K$) and match difficulty $d=1.00$.}
 \end{figure}
 
 \clearpage
 \subsection{Predicting a winner}
 
-\clearpage
-\section{CASE STUDY: USING INDIVIDUAL HKL RATINGS TO CONDUCT A DOUBLES TOURNAMENT}
-% Show distribution of team HKL using singles HKL for each player
-% Describe how singles ratings are weighted as doubles matches are played
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \clearpage
+% \section{CASE STUDY: USING INDIVIDUAL HKL RATINGS TO CONDUCT A DOUBLES TOURNAMENT}
+% % Show distribution of team HKL using singles HKL for each player
+% % Describe how singles ratings are weighted as doubles matches are played
 
-\subsection{Using individual ratings to form well-balanced teams}
-\subsection{Using a weighted HKL to account for an individual's performance in a team environment} 
+% \subsection{Using individual ratings to form well-balanced teams}
+% \subsection{Using a weighted HKL to account for an individual's performance in a team environment} 
 
 \end{document}
