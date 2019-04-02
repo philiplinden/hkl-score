@@ -63,8 +63,8 @@ Championship tournaments are a tried-and-true organization for competitions in
 sports today, and foosball is no exception. However, both single- and
 double-elimination tournament results are predicated upon fair seeding of the
 matchups at the start of the tournament. Some existing ranking systems used to
-seed tournaments are Elo Ranking\cite{}, used for the FIFA World Cup\cite{}, or
-the Swiss-system\cite{}, commonly used in chess tournaments\cite{}. A fair score
+seed tournaments are Elo Ranking \cite{elo}, used for the FIFA World Cup \cite{fifa}, or
+the Swiss-system \cite{swiss}, commonly used in chess tournaments \cite{chess}. A fair score
 in both Elo and Swiss systems requires that each member of the tournament plays
 every other in round-robin fashion, where $\frac{n}{2}(n-1)$ matches must be
 played before a rank is determined. The difference in these rankings is in how
@@ -280,32 +280,34 @@ players in the tournament has not changed. Therefore both player $A$ and player
 $B$ gain in Seed Rating, $S$, and Power Rating, $K$, but no other players in the
 tournament see a decrease in HKL.
 
-\subsection{Example Scenario: Applying HKL in a double elimination tournament}
-Since HKL is evaluated using scores normalized by the number of matches played
-(\autoref{eq:normalized-score}), no adjustments to the HKL calculations are
-required to compare the performance of players in the primary bracket and the
-consolation bracket of a double elimination tournament. For example, consider
-player $A$ and player $B$, where player $A$ loses to player $B$ in the first
-round of the primary bracket then wins all matches in the consolation bracket,
-and player $B$ wins all matches in the primary bracket. The structure of a
-double elimination bracket now leads to a rematch between $A$ and $B$ for the
-championship, but player $A$ has necessarily played one more game than player
-$B$ thus far. Since we normalize the accrued points by the number of games
-played, we can directly compare the HKL between $A$ and $B$.
+% \subsection{Example Scenario: Applying HKL in a double elimination tournament}
+% Since HKL is evaluated using scores normalized by the number of matches played
+% (\autoref{eq:normalized-score}), no adjustments to the HKL calculations are
+% required to compare the performance of players in the primary bracket and the
+% consolation bracket of a double elimination tournament. For example, consider
+% player $A$ and player $B$, where player $A$ loses to player $B$ in the first
+% round of the primary bracket then wins all matches in the consolation bracket,
+% and player $B$ wins all matches in the primary bracket. The structure of a
+% double elimination bracket now leads to a rematch between $A$ and $B$ for the
+% championship, but player $A$ has necessarily played one more game than player
+% $B$ thus far. Since we normalize the accrued points by the number of games
+% played, we can directly compare the HKL between $A$ and $B$.
 
-\subsection{Example Scenario: Predicting a winner in a ``perfect'' matchup}
-$k$ predicts long term trends (finishing matches) but $s$ accounts for per-game
-(transient, dynamic) performance
+% \subsection{Example Scenario: Predicting a winner in a ``perfect'' matchup}
+% $k$ predicts long term trends (finishing matches) but $s$ accounts for per-game
+% (transient, dynamic) performance
 
 % \section{CONCLUSION}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{ACKNOWLEDGMENTS}
+The authors thank Tyler Brown and Hamil Sulaiman for their continued support
+toward foosball matches and the application of the statistics they create.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \bibliography{hkl-score.bib}
-% \printbibliography
+\bibliography{hkl-score.bib}
+\bibliographystyle{IEEEtran}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \onecolumn
