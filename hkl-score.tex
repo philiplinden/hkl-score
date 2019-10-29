@@ -2,14 +2,15 @@
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
 
-\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out
-                                                          % if you need a4paper
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line 
+%                                                         % out if you need a4
 %\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
                                                           % paper
 
-% \IEEEoverridecommandlockouts                              % This command is only
-%                                                           % needed if you want to
-%                                                           % use the \thanks command
+% \IEEEoverridecommandlockouts                            % This command is only
+%                                                         % needed if you want 
+%                                                         % to use the \thanks 
+%                                                         % command
 \overrideIEEEmargins
 % See the \addtolength command later in the file to balance the column lengths
 % on the last page of the document
@@ -25,7 +26,8 @@
 
 \title{\LARGE \bf
 Hing-King-Linden Score: 
-A robust method of assessing foosball matchups independent of tournament structure
+A robust method of assessing foosball matchups independent of tournament 
+structure
 }
 
 \author{Philip Linden, Adam King and Brandon Hing% <-this % stops a space
@@ -63,15 +65,15 @@ Championship tournaments are a tried-and-true organization for competitions in
 sports today, and foosball is no exception. However, both single- and
 double-elimination tournament results are predicated upon fair seeding of the
 matchups at the start of the tournament. Some existing ranking systems used to
-seed tournaments are Elo Ranking \cite{elo}, used for the FIFA World Cup \cite{fifa}, or
-the Swiss-system \cite{swiss}, commonly used in chess tournaments \cite{chess}. A fair score
-in both Elo and Swiss systems requires that each member of the tournament plays
-every other in round-robin fashion, where $\frac{n}{2}(n-1)$ matches must be
-played before a rank is determined. The difference in these rankings is in how
-scores incorporate margin of victory and win/loss rates. Additionally, existing
-rating systems assume that results are binary (win or loss) or uncapped scores
-(higher score wins). In foosball, wins are determined by the first team to score
-a set number of points. 
+seed tournaments are Elo Ranking \cite{elo}, used for the FIFA World Cup
+\cite{fifa}, or the Swiss-system \cite{swiss}, commonly used in chess
+tournaments \cite{chess}. A fair score in both Elo and Swiss systems requires
+that each member of the tournament plays every other in round-robin fashion,
+where $\frac{n}{2}(n-1)$ matches must be played before a rank is determined. The
+difference in these rankings is in how scores incorporate margin of victory and
+win/loss rates. Additionally, existing rating systems assume that results are
+binary (win or loss) or uncapped scores (higher score wins). In foosball, wins
+are determined by the first team to score a set number of points. 
 
 In a recent tournament, the competition organizers used a single-elimination
 tournament between 16 randomly seeded players to seed an 8-team tournament of
@@ -175,7 +177,8 @@ $k$ with $d$.
         \includegraphics[width=\linewidth]{fig/matchup-difficulty-matrix.png}
         \label{fig:matchup-difficulty}
         \centering
-        \caption{The ratio of $d$ for any matchup indicates the relative difficulty for one player against another.}
+        \caption{The ratio of $d$ for any matchup indicates the relative 
+                 difficulty for one player against another.}
 \end{figure}
 
 Next, we weigh the number of points scored per opponent by the matchup
@@ -199,7 +202,8 @@ Rating.
 \end{equation}
 
 \begin{equation}
-        S = n_1 + \left(\frac{n_2 - n_1}{\text{max}(s) - \text{min}(s)}\right)(s - \text{min}(s))  
+        S = n_1 + \left(\frac{n_2 - n_1}{\text{max}(s) - \text{min}(s)}\right)
+        (s - \text{min}(s))  
         \label{eq:seed-rating}
 \end{equation}
 
@@ -218,7 +222,7 @@ the same fixed range, $H$ is also scaled to that range.
 \begin{table}[hb]
         \begin{tabular}{lccc|ccc}
                 \toprule
-                        & \multicolumn{3}{c}{Parameters} & \multicolumn{3}{c}{Rankings} \\
+                &\multicolumn{3}{c}{Parameters} & \multicolumn{3}{c}{Rankings}\\
                 \midrule
                 Player  & $r$   & $\hat{p}$ & $k$ & $S$ & $K$   & $H$ \\
                 \midrule
@@ -246,7 +250,9 @@ the same fixed range, $H$ is also scaled to that range.
 \end{table}
 
 \section{FEATURES}
-Since HKL is relative between all members of a tournament and only depends on scores earned during matches, four major advantages emerge from this new ranking method:
+Since HKL is relative between all members of a tournament and only depends on 
+scores earned during matches, four major advantages emerge from this new ranking
+method:
 
 \begin{enumerate}
         \item HKL of all contestants is defined as soon as one match is
@@ -413,10 +419,11 @@ single elimination tournament.
                         \bottomrule
                 \end{tabular}
         \end{subfigure}
-        \caption{Since player performance is scaled by the number of matches played,
-                valid predictions can be made about matchups between any player who
-                has completed at least one game. HKL requires all players in the 
-                tournament to play one game before can be determined.}
+        \caption{Since player performance is scaled by the number of matches
+                 played, valid predictions can be made about matchups between
+                 any player who has completed at least one game. HKL requires
+                 all players in the tournament to play one game before can be
+                 determined.}
 \end{figure}
 
 \begin{figure}[h!b]
@@ -637,20 +644,22 @@ single elimination tournament.
                 \end{tabular}
                 \caption{The HKL sees many changes after this match.}
         \end{subfigure}
-        \caption{The HKL correctly predicts Caleb to win against Tyler despite both players entering 
-                 the match with equal Power Ratings ($K$) and match difficulty $d=1.00$.}
+        \caption{The HKL correctly predicts Caleb to win against Tyler despite
+                 both players entering the match with equal Power Ratings ($K$)
+                 and match difficulty $d=1.00$.}
 \end{figure}
 
 \clearpage
 \subsection{Predicting a winner}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \clearpage
-% \section{CASE STUDY: USING INDIVIDUAL HKL RATINGS TO CONDUCT A DOUBLES TOURNAMENT}
-% % Show distribution of team HKL using singles HKL for each player
-% % Describe how singles ratings are weighted as doubles matches are played
+% \clearpage \section{CASE STUDY: USING INDIVIDUAL HKL RATINGS TO CONDUCT A
+% DOUBLES TOURNAMENT} % Show distribution of team HKL using singles HKL for each
+% player % Describe how singles ratings are weighted as doubles matches are
+% played
 
 % \subsection{Using individual ratings to form well-balanced teams}
-% \subsection{Using a weighted HKL to account for an individual's performance in a team environment} 
+% \subsection{Using a weighted HKL to account for an individual's performance in
+% a team environment} 
 
 \end{document}

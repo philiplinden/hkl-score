@@ -15,6 +15,7 @@
 *.cb
 *.cb2
 .*.lb
+*_temp.tex
 
 ## Intermediate documents:
 *.dvi
